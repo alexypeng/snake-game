@@ -1,3 +1,3 @@
 # Snake Game
 
-Snake game. Currently a work in progress.
+Snake Game created by Alexander Peng on 2024/08/07. Makes use of Object-Oriented Programming and Turtle graphics.
