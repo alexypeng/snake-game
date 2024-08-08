@@ -1,3 +1,6 @@
+# Snake game created by Alexander Peng on 2024/08/07. Focuses on using Object-Oriented Programming and Turtle graphics.
+# Click run to play the game.
+
 from turtle import Screen
 from snake import Snake
 from apple import Apple
