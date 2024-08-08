@@ -20,22 +20,20 @@ scoreboard = Scoreboard()
 s.update()
 
 s.listen()
+s.onkey(key="Up", fun=snake.up)
+s.onkey(key="Down", fun=snake.down)
+s.onkey(key="Left", fun=snake.left)
+s.onkey(key="Right", fun=snake.right)
 
 while game_is_on:
     s.update()
     time.sleep(0.1)
-
-    s.onkey(key="Up", fun=snake.up)
-    s.onkey(key="Down", fun=snake.down)
-    s.onkey(key="Left", fun=snake.left)
-    s.onkey(key="Right", fun=snake.right)
+    snake.move()
 
     if snake.head.distance(apple) < 15:
         apple.generate_position()
         scoreboard.increase_score()
         snake.extend()
-
-    snake.move()
 
     if snake.check_collision():
         game_is_on = False
