@@ -1,14 +1,17 @@
 from turtle import Turtle
-from snake import Snake
+import random
 
-class Apple():
-    def __init__(self, snake):
-        self.positions = []
-        self.set_positions()
+class Apple(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.shape("circle")
+        self.penup()
+        self.shapesize(stretch_len=0.5, stretch_wid=0.5)
+        self.color("red")
+        self.speed("fastest")
+        self.generate_position()
 
-    def set_positions(self):
-        for i in range(30):
-            for j in range(30):
-                self.positions.append((i*20, j*20))
-
-    def generate_position(self, snake):
+    def generate_position(self):
+        random_x = random.randint(-14, 14) * 20
+        random_y = random.randint(-14, 14) * 20
+        self.goto(random_x, random_y)

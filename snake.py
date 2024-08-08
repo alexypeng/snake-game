@@ -1,9 +1,10 @@
 from turtle import Turtle
 
 MOVE_DISTANCE = 20
+STARTING_POSITIONS = [(20, 0), (0, 0), (-20, 0)]
 
 
-class Snake():
+class Snake:
 
     def __init__(self):
         self.segments = []
@@ -11,12 +12,8 @@ class Snake():
         self.head = self.segments[0]
 
     def create_snake(self):
-        for i in range(3):
-            new_segment = Turtle(shape="square")
-            new_segment.up()
-            new_segment.color("white")
-            new_segment.goto(0 - i * 20, 0)
-            self.segments.append(new_segment)
+        for position in STARTING_POSITIONS:
+            self.grow(position)
 
     def up(self):
         if self.head.heading() != 90 and self.head.heading() != 270:
@@ -40,11 +37,21 @@ class Snake():
         self.head.forward(MOVE_DISTANCE)
 
     def check_collision(self):
-        if self.head.xcor() > 280 or self.head.xcor() < -300 or self.head.ycor() > 280 or self.head.ycor() < -300:
+        if self.head.xcor() > 280 or self.head.xcor() < -300 or self.head.ycor() > 300 or self.head.ycor() < -280:
             return True
 
-        for i in range(1, len(self.segments)):
-            if self.segments[i].pos() == self.head.pos():
+        for segment in self.segments[1:]:
+            if segment.distance(self.head) < 10:
                 return True
 
         return False
+
+    def grow(self, pos):
+        new_segment = Turtle(shape="square")
+        new_segment.up()
+        new_segment.color("white")
+        new_segment.goto(pos)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        self.grow(self.segments[-1].position())

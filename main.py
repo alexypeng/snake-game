@@ -1,5 +1,7 @@
 from turtle import Screen
 from snake import Snake
+from apple import Apple
+from scoreboard import Scoreboard
 import time
 
 game_is_on = True
@@ -12,6 +14,8 @@ s.title(titlestring="Snake Game")
 s.tracer(0)
 
 snake = Snake()
+apple = Apple()
+scoreboard = Scoreboard()
 
 s.update()
 
@@ -26,11 +30,16 @@ while game_is_on:
     s.onkey(key="Left", fun=snake.left)
     s.onkey(key="Right", fun=snake.right)
 
+    if snake.head.distance(apple) < 15:
+        apple.generate_position()
+        scoreboard.increase_score()
+        snake.extend()
+
     snake.move()
 
     if snake.check_collision():
         game_is_on = False
 
-
+scoreboard.game_over()
 
 s.exitonclick()
