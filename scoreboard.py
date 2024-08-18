@@ -14,19 +14,22 @@ class Scoreboard(Turtle):
         self.penup()
         self.color("white")
         self.goto(0, 260)
+        self.high_score = 0
         self.write_score()
+
 
     def write_score(self):
         """Write the score to the screen."""
         self.clear()
-        self.write(arg=f"Score: {self.score}", move=False, align=ALIGNMENT, font=FONT)
+        self.write(arg=f"Score: {self.score} High Score: {self.high_score}", move=False, align=ALIGNMENT, font=FONT)
 
     def increase_score(self):
         """Increase the score by 1."""
         self.score += 1
         self.write_score()
 
-    def game_over(self):
-        """Writes Game Over to the screen."""
-        self.goto(0, 0)
-        self.write(arg="GAME OVER", move=False, align=ALIGNMENT, font=FONT)
+    def reset_scoreboard(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+        self.score = 0
+        self.write_score()

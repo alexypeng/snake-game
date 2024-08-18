@@ -39,8 +39,8 @@ while game_is_on:
         snake.extend()
 
     if snake.check_collision():
-        game_is_on = False
+        scoreboard.reset()
+        snake.reset_snake()
 
-scoreboard.game_over()
 
 s.exitonclick()

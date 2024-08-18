@@ -65,3 +65,9 @@ class Snake:
     def extend(self):
         """Adds a new segment to the end of the snake."""
         self.grow(self.segments[-1].position())
+
+    def reset_snake(self):
+        for segment in self.segments:
+            segment.color("black")
+            del segment
+        self.create_snake()
